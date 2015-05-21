@@ -1,0 +1,42 @@
+<section class="container" data-ng-controller="JokesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Here's a list of really bad jokes</h1>
+    </div>
+    <div class="pull-right" data-ng-show="true">
+        <a class="btn btn-primary" href="/#!/" tooltip-placement="top" tooltip="Home">
+            <i class="glyphicon glyphicon-home"></i>
+        </a>
+        <a class="btn btn-primary" data-ng-click="preloadJokes(5)" tooltip-placement="top" tooltip="Random fill">
+            <i class="glyphicon glyphicon-cloud-download"></i>
+        </a>
+        <a class="btn btn-primary" href="/#!/jokes/create" tooltip-placement="top" tooltip="New">
+            <i class="glyphicon glyphicon-plus"></i>
+        </a>
+    </div>
+    <br><br>
+    <div class="list-group">
+        <a data-ng-repeat="joke in jokes" data-ng-href="#!/jokes/{{joke._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="joke.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="joke.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="joke.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!jokes.$resolved || jokes.length">
+    	No Jokes yet, why don't you <a href="/#!/jokes/create">create one</a>?
+    </div>
+    <div class="pull-right" data-ng-show="true">
+        <a class="btn btn-primary" href="/#!/" tooltip-placement="top" tooltip="Home">
+            <i class="glyphicon glyphicon-home"></i>
+        </a>
+        <a class="btn btn-primary" data-ng-click="preloadJokes(5)" tooltip-placement="top" tooltip="Random fill">
+            <i class="glyphicon glyphicon-cloud-download"></i>
+        </a>
+        <a class="btn btn-primary" href="/#!/jokes/create" tooltip-placement="top" tooltip="New">
+            <i class="glyphicon glyphicon-plus"></i>
+        </a>
+    </div>
+</section>

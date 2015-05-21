@@ -1,0 +1,30 @@
+<section class="container" data-ng-controller="JokesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="joke.name"></h1>
+	</div>
+	<div class="pull-right" data-ng-show="true">
+        <a class="btn btn-primary" href="/#!/" tooltip-placement="top" tooltip="Home">
+            <i class="glyphicon glyphicon-home"></i>
+        </a>
+        <a class="btn btn-primary" href="/#!/jokes"  tooltip-placement="top" tooltip="List">
+            <i class="glyphicon glyphicon-align-justify"></i>
+        </a>
+        <a class="btn btn-primary" href="/#!/jokes/create" tooltip-placement="top" tooltip="New">
+            <i class="glyphicon glyphicon-plus"></i>
+        </a>
+		<a class="btn btn-primary" href="/#!/jokes/{{joke._id}}/edit" tooltip-placement="top" tooltip="Edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();" tooltip-placement="top" tooltip="Delete">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="joke.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="joke.user.displayName"></span>
+		</em>
+	</small>
+</section>

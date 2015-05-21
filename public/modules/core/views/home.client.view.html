@@ -1,0 +1,67 @@
+<div data-ng-controller="HomeController" data-ng-init="init()">
+    <!-- ========== MAIN MENU ========== -->
+    <div class="container">
+        <ul id="gn-menu" class="gn-menu-main">
+            <li class="gn-trigger">
+                <a data-ng-class="{signedin: authentication.user, signedout: !authentication.user}" class="gn-icon gn-icon-menu"><span>Menu</span></a>
+                <nav class="gn-menu-wrapper">
+                    <div class="gn-scroller">
+                        <ul class="gn-menu">
+                            <li data-ng-hide="authentication.user"><a href="/#!/signup" class="gn-icon gn-icon-cog smoothScroll">Sign Up</a></li>
+                            <li data-ng-hide="authentication.user"><a href="/#!/signin" class="gn-icon gn-icon-cog smoothScroll">Sign In</a></li>
+                            <li data-ng-show="authentication.user"><a href="/#!/jokes" class="gn-icon gn-icon-cog smoothScroll">Admin</a></li>
+                            <li data-ng-show="authentication.user"><a href="/auth/signout" class="gn-icon gn-icon-cog smoothScroll">Sign Out</a></li>
+                        </ul>
+                    </div><!-- /gn-scroller -->
+                </nav>
+            </li>
+            <li><a href="#home" class="smoothScroll">The Comedy Store&#39;s Unfunny Brother</a></li>
+        </ul>
+    </div><!-- /container -->
+
+
+    <!-- ========== HEADER SECTION ========== -->
+    <section id="home" name="home"></section>
+    <div id="headerwrap">
+        <div class="container">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <h5 data-ng-bind-html="joke"></h5>
+                <img src="modules/core/img/brand/logo.png">
+                <h4>Nestling in the heart of London’s West End, The Comedy Store is the city’s busiest comedy venue with over 3500 people passing through its doors every week!</h4>
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div><!-- /container -->
+    </div><!-- /headerwrap -->
+
+
+    <!-- WHAT'S ON SECTION -->
+    <section id="services" name="services"></section>
+    <div class="container services">
+        <h3>What&#39;s on</h3>
+        <hr>
+        <br>
+        <br>
+        <ul class="list-group">
+            <li class="list-group-item" data-ng-repeat="entry in whatson track by $index">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{entry.displayHeading}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entry.displayBody}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div><!-- /container -->
+</div>
+
+<script>
+    $( document ).ready(function() {
+        new gnMenu( document.getElementById(     'gn-menu' ) );
+        jQuery(function($){ $.localScroll({filter:'.smoothScroll'}); });
+        cssfixHome();
+    });
+</script>
