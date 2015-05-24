@@ -1,5 +1,7 @@
 # The Comedy Store's Unfunny Brother by Alan McGinlay
 
+[![Build Status](https://travis-ci.org/amcginlay/comedystore.svg?branch=master)](https://travis-ci.org/amcginlay/comedystore)
+
 ![Comedy Store Logo](http://thecomedystore.co.uk/london/wp-content/themes/the-comedy-store/images/logo.png)
 
 As per the [instructions](https://github.com/makersacademy/comedy_api_tech_test), this is my attempt at the challenge.
