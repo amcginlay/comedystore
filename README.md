@@ -7,10 +7,10 @@
 As per the [instructions](https://github.com/makersacademy/comedy_api_tech_test), this is my attempt at the challenge.
 
 ## Tech Stack
-My solution is a single page [MEAN Stack](http://mean.io) app, using front-to-back Javascript components.  I used a [Yeoman](http://yeoman.io) generator to produce the authorisation and basic joke admin layers, customising this boilerblate code to suit.  I've used [Bootstrap](http://getbootstrap) for styling.  'What's On' web-scraping is performed using [Cheerio](http://cheeriojs.github.io/cheerio/).  BDD-style tests for the APIs are covered by [Mocha](http://mochajs.org/) and [Should](https://github.com/shouldjs/should.js).  Code anlalysis is performed by [JSHint](http://jshint.com/) and [CSS Lint](http://csslint.net/)
+My solution is a single page [MEAN Stack](http://mean.io) app, using front-to-back Javascript components.  I used a [Yeoman](http://yeoman.io) generator to produce the authorisation and basic joke admin layers, customising this boilerplate code to suit.  I've used [Bootstrap](http://getbootstrap) for styling.  'What's On' web-scraping is performed using [Cheerio](http://cheeriojs.github.io/cheerio/).  BDD-style tests for the APIs are covered by [Mocha](http://mochajs.org/) and [Should](https://github.com/shouldjs/should.js).  Code anlalysis is performed by [JSHint](http://jshint.com/) and [CSS Lint](http://csslint.net/)
 
 ## Preparing and Launching (Dev Mode)
-* I will asuume that you have [Node.js](https://nodejs.org/), [npm](https://www.npmjs.com/) and [MongoDB](https://www.mongodb.org/) installed locally
+* I will assume that you have [Node.js](https://nodejs.org/), [npm](https://www.npmjs.com/) and [MongoDB](https://www.mongodb.org/) installed locally
 * `git clone` this repository and run `npm install` from its root to download the project dependencies
 * MongoDB needs to be launched locally using `mongod --maxConns 100` on the default port (27017).
 * You may then 'lint' the code and launch the web server just by running [Grunt](http://gruntjs.com/) on the command line with `grunt`
