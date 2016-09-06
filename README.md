@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/amcginlay/comedystore.svg?branch=master)](https://travis-ci.org/amcginlay/comedystore)
 
-![Comedy Store Logo](https://raw.githubusercontent.com/amcginlay/comedystore/master/public/modules/core/img/brand/logo.png)
+![Comedy Store Logo](http://thecomedystore.co.uk/london/wp-content/themes/the-comedy-store/images/logo.png)
 
 As per the [instructions](https://github.com/makersacademy/comedy_api_tech_test), this is my attempt at the challenge.
 
