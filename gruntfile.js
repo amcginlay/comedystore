@@ -161,30 +161,32 @@ module.exports = function(grunt) {
 	// Making grunt default to force in order not to break the project.
 	grunt.option('force', true);
 
-	// A Task for loading the configuration object
-	grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
-		var init = require('./config/init')();
-		var config = require('./config/config');
+	(function registerTasks() {
+		// A Task for loading the configuration object
+		grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
+			var init = require('./config/init')();
+			var config = require('./config/config');
 
-		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
-		grunt.config.set('applicationCSSFiles', config.assets.css);
-	});
+			grunt.config.set('applicationJavaScriptFiles', config.assets.js);
+			grunt.config.set('applicationCSSFiles', config.assets.css);
+		});
 
-	// Default task(s).
-	grunt.registerTask('default', ['lint', 'concurrent:default']);
+		// Default task(s).
+		grunt.registerTask('default', ['lint', 'concurrent:default']);
 
-	// Debug task.
-	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
+		// Debug task.
+		grunt.registerTask('debug', ['lint', 'concurrent:debug']);
 
-	// Secure task(s).
-	grunt.registerTask('secure', ['env:secure', 'lint', 'concurrent:default']);
+		// Secure task(s).
+		grunt.registerTask('secure', ['env:secure', 'lint', 'concurrent:default']);
 
-	// Lint task(s).
-	grunt.registerTask('lint', ['jshint', 'csslint']);
+		// Lint task(s).
+		grunt.registerTask('lint', ['jshint', 'csslint']);
 
-	// Build task(s).
-	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
+		// Build task(s).
+		grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
-	// Test task.
-	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+		// Test task.
+		grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	})();
 };

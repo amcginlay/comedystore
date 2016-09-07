@@ -30,20 +30,22 @@ exports.list = function(req, res) {
                 var weekDayTimeArray = h4First.split(' - ');
                 var price = eventMetaH4Dom.children('span').first().text().trim();
 
-                var commedians = [];
-                $(eventInfoDom).find('.comedians .commodal .comedian-text').each(function(i, elem) {
-                    var comedian = $(this).clone().children().remove().end().text();
-                    commedians.push(comedian);
-                });
+                (function publishComedyNight(){
+                    var commedians = [];
+                    $(eventInfoDom).find('.comedians .commodal .comedian-text').each(function(i, elem) {
+                        var comedian = $(this).clone().children().remove().end().text();
+                        commedians.push(comedian);
+                    });
 
-                var comedyNight = {
-                    eventDate: weekDayTimeArray[0] + ' ' + eventDay + ' ' + eventMonth,
-                    eventTime: weekDayTimeArray[1],
-                    eventPrice: price,
-                    eventTitle: $(eventMetaDom).children('.meta-title').first().text(),
-                    comedians: commedians
-                };
-                comedyNights.push(comedyNight);
+                    var comedyNight = {
+                        eventDate: weekDayTimeArray[0] + ' ' + eventDay + ' ' + eventMonth,
+                        eventTime: weekDayTimeArray[1],
+                        eventPrice: price,
+                        eventTitle: $(eventMetaDom).children('.meta-title').first().text(),
+                        comedians: commedians
+                    };
+                    comedyNights.push(comedyNight);
+                })();
             });
 
             res.json({ value: comedyNights});

@@ -27,28 +27,30 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
 	// The output array
 	var output = [];
 
-	// If glob pattern is array so we use each pattern in a recursive way, otherwise we use glob 
-	if (_.isArray(globPatterns)) {
-		globPatterns.forEach(function(globPattern) {
-			output = _.union(output, _this.getGlobbedFiles(globPattern, removeRoot));
-		});
-	} else if (_.isString(globPatterns)) {
-		if (urlRegex.test(globPatterns)) {
-			output.push(globPatterns);
-		} else {
-			var files = glob(globPatterns, {
-				sync: true
+	(function buildOutputArray(){
+		// If glob pattern is array so we use each pattern in a recursive way, otherwise we use glob
+		if (_.isArray(globPatterns)) {
+			globPatterns.forEach(function(globPattern) {
+				output = _.union(output, _this.getGlobbedFiles(globPattern, removeRoot));
 			});
-
-			if (removeRoot) {
-				files = files.map(function(file) {
-					return file.replace(removeRoot, '');
+		} else if (_.isString(globPatterns)) {
+			if (urlRegex.test(globPatterns)) {
+				output.push(globPatterns);
+			} else {
+				var files = glob(globPatterns, {
+					sync: true
 				});
-			}
 
-			output = _.union(output, files);
+				if (removeRoot) {
+					files = files.map(function(file) {
+						return file.replace(removeRoot, '');
+					});
+				}
+
+				output = _.union(output, files);
+			}
 		}
-	}
+	})();
 
 	return output;
 };
