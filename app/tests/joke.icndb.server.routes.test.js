@@ -93,7 +93,8 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
             });
     });
 
-    it('should be able to get single Joke instance (with name swapped) if not signed in (GET /jokes/:jokeId?firstName=Joe&lastName=Bloggs)', function(done) {
+    it('should get single Joke (name swapped) if not signed in (GET /jokes/:jokeId?firstName=Joe&lastName=Bloggs)',
+        function(done) {
         this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
 
         // firstly, request a random joke so we can extract a valid id to feed back into the test
@@ -136,7 +137,8 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
             });
     });
 
-    it('should be able to get random Joke instance (with name swapped) if not signed in (GET /jokes/random?firstName=Joe&lastName=Bloggs)', function(done) {
+    it('should get random Joke (with name swapped) if not signed in (GET /jokes/random?firstName=Joe&lastName=Bloggs)',
+        function(done) {
         this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
 
         agent.get('/jokes/random?firstName=Joe&lastName=Bloggs')
@@ -154,7 +156,8 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
             });
     });
 
-    it('should be able to get multiple random Joke instances if not signed in (GET /jokes/random/:count)', function(done) {
+    it('should be able to get multiple random Joke instances if not signed in (GET /jokes/random/:count)',
+        function(done) {
         this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
 
         // get two randoms
@@ -189,7 +192,7 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
 
                     res.body.should.be.instanceOf(Object);
                     res.body.should.have.property('type', 'success');
-                    res.body.should.have.property('value').and.be.greaterThan(500); // currently 546 in the ICNDB database
+                    res.body.should.have.property('value').and.be.greaterThan(500); // ~546 in the ICNDB database
 
                     done();
                 });

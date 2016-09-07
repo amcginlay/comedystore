@@ -1,7 +1,8 @@
 'use strict';
 
 // Jokes controller
-angular.module('jokes').controller('JokesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Jokes', 'PreloadJokes',
+angular.module('jokes').controller('JokesController',
+	['$scope', '$stateParams', '$location', 'Authentication', 'Jokes', 'PreloadJokes',
 	function($scope, $stateParams, $location, Authentication, Jokes, PreloadJokes) {
 		$scope.authentication = Authentication;
 

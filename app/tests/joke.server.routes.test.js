@@ -82,7 +82,7 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
                 res1.body.should.have.property('type', 'success');
                 res1.body.should.have.property('value').and.be.instanceOf(Object);
-                res1.body.value.should.have.property('id').and.be.instanceOf(String); // NOTE in ICNDB id is a Number
+                res1.body.value.should.have.property('id').and.be.instanceOf(String); // is number in ICNDB
 
                 var savedId = res1.body.value.id;
 
@@ -94,7 +94,7 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
                             res2.body.should.have.property('type', 'success');
                             res2.body.should.have.property('value').and.be.instanceOf(Object);
-                            res2.body.value.should.have.property('id').and.be.instanceOf(String); // NOTE in ICNDB id is a Number
+                            res2.body.value.should.have.property('id').and.be.instanceOf(String); // is number in ICNDB
                             res2.body.value.should.have.property('joke').and.be.instanceOf(String);
 
                             // compare saved ID and targeted one
@@ -136,7 +136,8 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
             });
     });
 
-    it('should be able to get single Joke instance (with name swapped) if signed in (GET /jokes/:jokeId?firstName=Joe&lastName=Bloggs)', function(done) {
+    it('should get single Joke (with name swapped) if signed in (GET /jokes/:jokeId?firstName=Joe&lastName=Bloggs)',
+        function(done) {
         this.timeout(INTERNAL_TIMEOUT_MS);
 
         joke1.name = 'Chuck Norris jokes are not very funny';
@@ -151,7 +152,7 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
                 res1.body.should.have.property('type', 'success');
                 res1.body.should.have.property('value').and.be.instanceOf(Object);
-                res1.body.value.should.have.property('id').and.be.instanceOf(String); // NOTE in ICNDB id is a Number
+                res1.body.value.should.have.property('id').and.be.instanceOf(String); // is number in ICNDB
 
                 var savedId = res1.body.value.id;
 
@@ -163,7 +164,7 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
                         res2.body.should.have.property('type', 'success');
                         res2.body.should.have.property('value').and.be.instanceOf(Object);
-                        res2.body.value.should.have.property('id').and.be.instanceOf(String); // NOTE in ICNDB id is a Number
+                        res2.body.value.should.have.property('id').and.be.instanceOf(String); // is number in ICNDB
                         res2.body.value.should.have.property('joke').and.be.instanceOf(String);
 
                         // compare saved ID and targeted one, then check the name swap occurred
@@ -175,7 +176,8 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
             });
     });
 
-    it('should be able to get the default message for random Joke instance if signed in and database is empty (GET /jokes/random)', function(done) {
+    it('should get default message for random Joke instance if signed in and database is empty (GET /jokes/random)',
+        function(done) {
         this.timeout(INTERNAL_TIMEOUT_MS);
 
         // grab a random joke
@@ -195,7 +197,8 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
             });
     });
 
-    it('should be able to mark Joke exluded when we get a random Joke instance if signed in (GET /jokes/random)', function(done) {
+    it('should be able to mark Joke exluded when we get a random Joke instance if signed in (GET /jokes/random)',
+        function(done) {
         this.timeout(INTERNAL_TIMEOUT_MS);
 
         // save a joke
@@ -207,7 +210,7 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
                 res1.body.should.have.property('type', 'success');
                 res1.body.should.have.property('value').and.be.instanceOf(Object);
-                res1.body.value.should.have.property('id').and.be.instanceOf(String); // NOTE in ICNDB id is a Number
+                res1.body.value.should.have.property('id').and.be.instanceOf(String); // is number in ICNDB
 
                 var savedId = res1.body.value.id;
 
@@ -243,7 +246,7 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
                 res1.body.should.have.property('type', 'success');
                 res1.body.should.have.property('value').and.be.instanceOf(Object);
-                res1.body.value.should.have.property('id').and.be.instanceOf(String); // NOTE in ICNDB id is a Number
+                res1.body.value.should.have.property('id').and.be.instanceOf(String); // is number in ICNDB
 
                 var savedId = res1.body.value.id;
 
@@ -261,7 +264,8 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
                         // compare saved ID and the random one, they must be the same because only one exists
                         res2.body.value.id.should.match(savedId);
 
-                        // grab a SECOND joke, which should return a default because the spec say says jokes cannot be repeated
+                        // grab a SECOND joke, which should return a default because
+                        // the spec say says jokes cannot be repeated
                         agent.get('/jokes/random')
                             .expect(200)
                             .end(function(err3, res3) {
@@ -323,7 +327,8 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
         });
     });
 
-    it('should be able to get the default message for a multiple random Joke request if signed in and too few jokes available (GET /jokes/random)', function(done) {
+    it('should get default msg for multiple random Joke req if signed in & too few jokes available (GET /jokes/random)',
+        function(done) {
         this.timeout(INTERNAL_TIMEOUT_MS);
 
         // save a joke
@@ -344,7 +349,8 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
                         res.body.value[1].should.have.property('joke').and.be.instanceOf(String);
                         res.body.value[2].should.have.property('joke').and.be.instanceOf(String);
 
-                        // ensure we get the default joke back in the second and third slots because too few jokes were available
+                        // ensure we get the default joke back in the second
+                        // and third slots because too few jokes were available
                         res.body.value[1].joke.should.match(outOfJokesMessage);
                         res.body.value[2].joke.should.match(outOfJokesMessage);
 

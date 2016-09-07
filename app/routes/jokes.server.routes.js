@@ -50,9 +50,13 @@ module.exports = function(app) {
 		// FETCH ONE
         .get(function(req, res) { return getJokes(req).read(req, res); } )
 		// UPDATE ONE
-        .put(users.requiresLogin, jokesHasAuthorization, function(req, res) { return getJokes(req).update(req, res); } )
+        .put(users.requiresLogin, jokesHasAuthorization, function(req, res) {
+            return getJokes(req).update(req, res);
+        } )
         // DELETE ONE
-		.delete(users.requiresLogin, jokesHasAuthorization, function(req, res) { return getJokes(req).delete(req, res); } );
+		.delete(users.requiresLogin, jokesHasAuthorization, function(req, res) {
+            return getJokes(req).delete(req, res);
+        } );
 
 	// Finish by binding the Joke middleware
 	app.param('jokeId', function(req, res, next, id) { return getJokes(req).jokeByID(req, res, next, id); } );

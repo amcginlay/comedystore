@@ -26,7 +26,8 @@ function forwardToIcndb(req, res) {
  * Create a Joke
  */
 exports.create = function(req, res) {
-    // the route stipulates that this method requires user logged in but we don't log in to INCDB so this should never execute
+    // the route stipulates that this method requires user logged in
+    // but we don't log in to INCDB so this should never execute
     return res.status(400).send({message: 'Not Implemented'});
 };
 
@@ -49,7 +50,8 @@ exports.list = function(req, res) {
  * Update a Joke
  */
 exports.update = function(req, res) {
-    // the route stipulates that this method requires user logged in but we don't log in to INCDB so this should never execute
+    // the route stipulates that this method requires user logged in
+    // but we don't log in to INCDB so this should never execute
     return res.status(400).send({message: 'Not Implemented'});
 };
 
@@ -64,7 +66,8 @@ exports.delete = function(req, res) {
  * Joke middleware
  */
 exports.jokeByID = function(req, res, next, id) {
-    // this "middleware" works similar to the forwardToIcndb function, except it decorates the request and passes on to next()
+    // this "middleware" works similar to the forwardToIcndb function,
+    // except it decorates the request and passes on to next()
     return http.get(createOptions(req.url), function (response) {
         response.pipe(bl(function (err, data) {
             var results = JSON.parse(data);
@@ -81,7 +84,8 @@ exports.jokeByID = function(req, res, next, id) {
  * Joke authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-    // this is only ever used in conjuction with requiresLogin (see the joke routes and users.authorization.server.controller.js)
+    // this is only ever used in conjunction with requiresLogin
+    // (see the joke routes and users.authorization.server.controller.js)
     // which, for ICNDB, will always respond with a 401 ('User is not logged in')
     next();
 };

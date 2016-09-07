@@ -26,7 +26,7 @@ exports.list = function(req, res) {
                 var eventMonth = $(eventDateDom).children('span').eq(1).text();
 
                 var eventMetaH4Dom = $(eventMetaDom).children('h4');
-                var h4First = eventMetaH4Dom.first().clone().children().remove().end().text(); // eliminate the stray child <span>
+                var h4First = eventMetaH4Dom.first().clone().children().remove().end().text(); // zap stray child <span>
                 var weekDayTimeArray = h4First.split(' - ');
                 var price = eventMetaH4Dom.children('span').first().text().trim();
 

@@ -50,7 +50,8 @@
 			});
 		}));
 
-		it('$scope.find() should create an array with at least one Joke object fetched from XHR', inject(function(Jokes) {
+		it('$scope.find() should create an array with at least one Joke object fetched from XHR',
+			inject(function(Jokes) {
 			// Create sample Joke using the Jokes service
 			var sampleJoke = new Jokes({
 				name: 'New Joke'
@@ -70,7 +71,8 @@
 			expect(scope.jokes).toEqualData(sampleJokes);
 		}));
 
-		it('$scope.findOne() should create an array with one Joke object fetched from XHR using a jokeId URL parameter', inject(function(Jokes) {
+		it('$scope.findOne() should create an array with one Joke object fetched from XHR using a jokeId URL parameter',
+			inject(function(Jokes) {
 			// Define a sample Joke object
 			var sampleJoke = new Jokes({
 				name: 'New Joke'
@@ -90,7 +92,8 @@
 			expect(scope.joke).toEqualData(sampleJoke);
 		}));
 
-		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Jokes) {
+		it('$scope.create() with valid form data should send POST with form input values and locate to new object URL',
+			inject(function(Jokes) {
 			// Create a sample Joke object
 			var sampleJokePostData = new Jokes({
 				name: 'New Joke'
@@ -140,7 +143,8 @@
 			expect($location.path()).toBe('/jokes/' + sampleJokePutData._id);
 		}));
 
-		it('$scope.remove() should send a DELETE request with a valid jokeId and remove the Joke from the scope', inject(function(Jokes) {
+		it('$scope.remove() should send a DELETE request with a valid jokeId and remove the Joke from the scope',
+			inject(function(Jokes) {
 			// Create new Joke object
 			var sampleJoke = new Jokes({
 				_id: '525a8422f6d0f87f0e407a33'

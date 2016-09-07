@@ -36,8 +36,9 @@ function reformatJoke(modelJoke, req) {
     result.type = 'success';
     result.value = {
         // Stuck between a rock and hard place ...
-        // Numeric identity is not recommended in NoSQL databases so we use string based ObjectIDs, but ICNDB uses numbers.
-        // We can't change the ICNDB spec, but we shouldn't be fabricating numberical identifiers in MongoDB
+        // Numeric identity is not recommended in NoSQL databases
+        // so we use string based ObjectIDs, but ICNDB uses numbers.
+        // We can't change the ICNDB spec, but we shouldn't be fabricating numerical identifiers in MongoDB
         // Therefore, this implementation differs from ICNDB with regard to data types.
         // Fingers crossed that everything copes with that difference!
         id: result._id,
@@ -47,7 +48,7 @@ function reformatJoke(modelJoke, req) {
 }
 
 function fetchRandomChuckNorrisJokes(count, cb) {
-    // TODO it would be nice to know how to leverage the (mildly redundant) work already done in the ICNDB controller, but this will do ...
+    // TODO it would be nice to know how to leverage the work already done in the ICNDB controller, but this will do ...
     return http.get({host: 'api.icndb.com', path: '/jokes/random/' + count}, function (response) {
         response.pipe(bl(function (err, data) {
             var results = JSON.parse(data);
@@ -174,7 +175,9 @@ function getRandomJoke(req, cb) {
             var adjustedJokeCount = jokeCount - user.excludedJokes.length;
             if (adjustedJokeCount < 0) adjustedJokeCount = 0;
 
-            Joke.findOne({ _id: { $nin: user.excludedJokes } }).skip(Math.floor(Math.random() * (adjustedJokeCount))).exec(function(err, joke) {
+            Joke.findOne({ _id: { $nin: user.excludedJokes } })
+                .skip(Math.floor(Math.random() * (adjustedJokeCount)))
+                .exec(function(err, joke) {
                 if (err) return cb(err);
 
                 if (joke) {
@@ -262,7 +265,8 @@ exports.preload = function(req, res) {
         fetchRandomChuckNorrisJokes(count, function(err, data) {
 
             function saveJoke(value, cb) {
-                // TODO it would be nice to know how to leverage the create method above as it does te same thing, but in the context of a req/res pair
+                // TODO it would be nice to know how to leverage the create method above as it does te same thing,
+                // but in the context of a req/res pair
                 var joke = new Joke({
                     name: value.joke
                 });
