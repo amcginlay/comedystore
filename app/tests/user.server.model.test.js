@@ -87,7 +87,7 @@ describe('User Model Unit Tests:', function() {
                             .end(function(meErr, meRes) {
                                 if (meErr) return done(meErr);
 
-                                should(meRes.body).be.null;
+                                should(meRes.body).be.null();
 
                                 // sign in
                                 agent.post('/auth/signin')
@@ -116,8 +116,8 @@ describe('User Model Unit Tests:', function() {
                                                             .end(function(me3Err, me3Res) {
                                                                 if (me3Err) return done(me3Err);
 
-                                                                should(meRes.body).be.null;
-                                                                
+                                                                should(meRes.body).be.null();
+
                                                                 // if we got here we're all good
                                                                 done();
                                                             });
