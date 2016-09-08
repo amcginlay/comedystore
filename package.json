@@ -60,6 +60,7 @@
     "grunt-node-inspector": "~0.4.2",
     "grunt-nodemon": "~0.4.2",
     "jasmine-core": "^2.5.0",
+    "jscover": "^1.0.0",
     "karma": "~1.2.0",
     "karma-chrome-launcher": "~2.0.0",
     "karma-coverage": "~1.1.1",
@@ -68,6 +69,7 @@
     "karma-phantomjs-launcher": "~1.0.2",
     "load-grunt-tasks": "~3.5.2",
     "mocha": "^3.0.2",
+    "mocha-lcov-reporter": "^1.2.0",
     "should": "~11.1.0",
     "supertest": "~2.0.0"
   }
