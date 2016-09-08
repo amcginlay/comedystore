@@ -46,6 +46,7 @@
     "swig": "~1.4.1"
   },
   "devDependencies": {
+    "coveralls": "^2.11.12",
     "grunt": "^1.0.1",
     "grunt-concurrent": "~2.3.1",
     "grunt-contrib-csslint": "^1.0.0",
