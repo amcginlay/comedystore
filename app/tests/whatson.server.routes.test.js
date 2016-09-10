@@ -17,7 +17,7 @@ var EXTERNAL_TIMEOUT_MS = 20000; // for Comedy Store requests
 describe('Whats On tests', function() {
 
     this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-    this.slow(EXTERNAL_TIMEOUT_MS)
+    this.slow(EXTERNAL_TIMEOUT_MS);
 
     beforeEach(function(done) {
         done();
