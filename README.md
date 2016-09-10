@@ -1,7 +1,7 @@
 # The Comedy Store's Unfunny Brother by Alan McGinlay
 
 [![Build Status](https://travis-ci.org/amcginlay/comedystore.svg?branch=master)](https://travis-ci.org/amcginlay/comedystore)
-[![Coverage Status](https://coveralls.io/repos/github/amcginlay/comedystore/badge.svg)](https://coveralls.io/github/amcginlay/comedystore)
+[![Coverage Status](https://coveralls.io/repos/github/amcginlay/comedystore/badge.svg?branch=master)](https://coveralls.io/github/amcginlay/comedystore?branch=master)
 
 ![Comedy Store Logo](https://raw.githubusercontent.com/amcginlay/comedystore/master/public/modules/core/img/brand/logo.png)
 
