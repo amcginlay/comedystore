@@ -1,13 +1,6 @@
 'use strict';
 
 /**
- * Module dependencies.
- */
-var _ = require('lodash'),
-	mongoose = require('mongoose'),
-	User = mongoose.model('User');
-
-/**
  * Require login routing middleware
  */
 exports.requiresLogin = function(req, res, next) {

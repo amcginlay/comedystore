@@ -182,7 +182,7 @@ function getRandomJoke(req, cb) {
 
                 if (joke) {
                     user.excludedJokes.push(joke.id);
-                    User.findOneAndUpdate({_id: user.id}, user, {upsert: false}, function(err, data) {
+                    User.findOneAndUpdate({_id: user.id}, user, {upsert: false}, function(err) {
                         if (err) return cb(err);
 
                         cb(null, reformatJoke(joke, req));

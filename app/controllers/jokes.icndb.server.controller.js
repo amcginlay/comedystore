@@ -65,13 +65,12 @@ exports.delete = function(req, res) {
 /**
  * Joke middleware
  */
-exports.jokeByID = function(req, res, next, id) {
+exports.jokeByID = function(req, res, next) {
     // this "middleware" works similar to the forwardToIcndb function,
     // except it decorates the request and passes on to next()
     return http.get(createOptions(req.url), function (response) {
         response.pipe(bl(function (err, data) {
-            var results = JSON.parse(data);
-            req.joke = results;
+            req.joke = JSON.parse(data);
             next();
         }));
     })

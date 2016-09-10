@@ -12,7 +12,7 @@
 
 		beforeEach(function() {
 			jasmine.addMatchers({
-				toEqualData: function(util, customEqualityTesters) {
+				toEqualData: function() {
 					return {
 						compare: function(actual, expected) {
 							return {

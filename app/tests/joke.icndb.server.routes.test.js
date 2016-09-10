@@ -34,7 +34,7 @@ var beforeEachFn = function(done) {
     // Save a user to the test db and sign out to be sure we only test ICNDB
     user.save(function() {
         agent.get('/auth/signout')
-            .end(function(err, res) {
+            .end(function() {
                 done();
             });
     });
@@ -66,7 +66,7 @@ describe('Joke ICNDB CRUD tests (not signed in) - batch 1', function() {
             .end(function(req, res) {
                 // Set assertion
                 res.body.type.should.match('success');
-                res.body.value.should.be.instanceOf(Array); // .with.length.greaterThan(0); ???
+                res.body.value.should.be.instanceOf(Array);
                 res.body.value.length.should.be.greaterThan(0);
                 res.body.value[0].should.have.property('id');
                 res.body.value[0].should.have.property('joke');
@@ -237,7 +237,6 @@ describe('Joke ICNDB CRUD tests (not signed in) - batch 2', function() {
 
                 var existingJoke = res1.body;
                 var idToUpdate = existingJoke.value.id;
-                var oldJoke = existingJoke.value.joke;
 
                 existingJoke.value.joke = 'updated joke definition';
 

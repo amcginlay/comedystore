@@ -3,8 +3,7 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-	errorHandler = require('../errors.server.controller'),
+var errorHandler = require('../errors.server.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User');
@@ -18,7 +17,6 @@ exports.signup = function(req, res) {
 
 	// Init Variables
 	var user = new User(req.body);
-	var message = null;
 
 	// Add missing user fields
 	user.provider = 'local';

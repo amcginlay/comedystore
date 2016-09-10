@@ -16,7 +16,7 @@ exports.list = function(req, res) {
             var $ = cheerio.load(results);
 
             var comedyNights = [];
-            $('.side-block').each(function(i, elem) {
+            $('.side-block').each(function() {
 
                 var eventDateDom = $(this).find('.caldate');
                 var eventMetaDom = $(this).find('.show-meta');
@@ -32,7 +32,7 @@ exports.list = function(req, res) {
 
                 (function publishComedyNight(){
                     var commedians = [];
-                    $(eventInfoDom).find('.comedians .commodal .comedian-text').each(function(i, elem) {
+                    $(eventInfoDom).find('.comedians .commodal .comedian-text').each(function() {
                         var comedian = $(this).clone().children().remove().end().text();
                         commedians.push(comedian);
                     });
