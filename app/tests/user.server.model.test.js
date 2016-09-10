@@ -66,24 +66,26 @@ describe('User Model Unit Tests:', function() {
             agent.post('/auth/signup')
                 .send(user)
                 .expect(200)
-                .end(function(signinErr) {
-                    should(signinErr).be.null();
-                    done();
+                .end(function(err) {
+                    done(err);
             });
         }
 
 		it('should be able to sign up without problems', function(done) {
-			signupTest(done);
+			signupTest(function(err){
+                should(err).be.null();
+                done(err);
+            });
 		});
 
-		it('should fail to save an existing user again', function(done) {
-            signupTest(function(){
-                user2.save(function(err) {
-                    should.exist(err);
+        it('should fail to sign up twice with the same user details', function(done) {
+            signupTest(function() {
+                signupTest(function(err) {
+                    should(err).be.not.null();
                     done();
                 });
             });
-		});
+        });
 
         it('should signin and signout without problems', function(done) {
             signupTest(function(saveErr) {
