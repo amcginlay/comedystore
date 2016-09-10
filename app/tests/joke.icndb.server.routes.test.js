@@ -18,10 +18,10 @@ var EXTERNAL_TIMEOUT_MS = 20000; // for ICNDB requests (i.e. not signed in)
  */
 describe('Joke ICNDB CRUD tests (not signed in)', function() {
 
+    this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
+    this.slow(EXTERNAL_TIMEOUT_MS);
+
     beforeEach(function(done) {
-
-        this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
         // Create user credentials
 		credentials = {
 			username: 'username',
@@ -50,8 +50,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
 
     (function testBatchOne(){
         it('should be able to get a list of Jokes if not signed in (GET /jokes)', function(done) {
-            this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
             agent.get('/jokes')
                 .expect(200)
                 .end(function(req, res) {
@@ -68,8 +66,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
         });
 
         it('should be able to get single Joke instance if not signed in (GET /jokes/:jokeId)', function(done) {
-            this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
             // firstly, request a random joke so we can extract a valid id to feed back into the test
             agent.get('/jokes/random')
                 .expect(200)
@@ -96,8 +92,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
 
         it('should get single Joke (name swapped) if not signed in (GET /jokes/:jokeId?firstName=Joe&lastName=Bloggs)',
             function(done) {
-                this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
                 // firstly, request a random joke so we can extract a valid id to feed back into the test
                 agent.get('/jokes/random')
                     .expect(200)
@@ -123,8 +117,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
             });
 
         it('should be able to get random Joke instance if not signed in (GET /jokes/random)', function(done) {
-            this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
             agent.get('/jokes/random')
                 .expect(200)
                 .end(function(err1, res1) {
@@ -140,8 +132,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
 
         it('should get random Joke (name swapped) if not signed in (GET /jokes/random?firstName=Joe&lastName=Bloggs)',
             function(done) {
-                this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
                 agent.get('/jokes/random?firstName=Joe&lastName=Bloggs')
                     .expect(200)
                     .end(function(err1, res1) {
@@ -159,8 +149,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
 
         it('should be able to get multiple random Joke instances if not signed in (GET /jokes/random/:count)',
             function(done) {
-                this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
                 // get two randoms
                 agent.get('/jokes/random/2')
                     .expect(200)
@@ -185,8 +173,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
             });
 
         it('should be able to get a count of Joke instances if not signed in (GET /jokes/count)', function(done) {
-            this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
             agent.get('/jokes/count')
                 .expect(200)
                 .end(function(err, res) {
@@ -200,8 +186,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
         });
 
         it('should not be able to save Joke instance if not signed in (POST /jokes)', function(done) {
-            this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
             var joke1 = {
                 id: 99999,
                 joke: 'Joke 1'
@@ -222,9 +206,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
 
     (function testBatchTwo(){
         it('should not be able to update Joke instance if not signed in (PUT /jokes/:jokeId)', function(done) {
-
-            this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
             // firstly, request a random joke so we can attempt to update it
             agent.get('/jokes/random')
                 .expect(200)
@@ -251,8 +232,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
         });
 
         it('should not be able to delete Joke instance if not signed in (DELETE /jokes/:jokeId)', function(done) {
-            this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
             // firstly, request a random joke so we can extract a valid id to feed back into the test
             agent.get('/jokes/random')
                 .expect(200)
@@ -274,8 +253,6 @@ describe('Joke ICNDB CRUD tests (not signed in)', function() {
     })();
 
     afterEach(function(done) {
-        this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
         User.remove().exec(function() {
             //mongoose.connection.close(function() {
                 done();

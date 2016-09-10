@@ -10,19 +10,22 @@ var should = require('should'),
     User = mongoose.model('User'),
     Joke = mongoose.model('Joke'),
     agent = request.agent(app);
-    //passport = require('passport');
 
 /**
  * Globals
  */
 var credentials, user, user2;
+var EXTERNAL_TIMEOUT_MS = 20000; // for MongoDB requests
 
 /**
  * Unit tests
  */
 describe('User Model Unit Tests:', function() {
-	beforeEach(function(done) {
 
+    this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
+    this.slow(EXTERNAL_TIMEOUT_MS);
+
+	beforeEach(function(done) {
         // Create user credentials
         credentials = {
             username: 'username',

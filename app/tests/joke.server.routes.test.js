@@ -17,15 +17,18 @@ var should = require('should'),
  */
 var credentials, user, joke1, joke2;
 var INTERNAL_TIMEOUT_MS = process.env.DEV_TIMEOUT || 5000; // use larger number for debugging (default 5000)
+var EXTERNAL_TIMEOUT_MS = 20000;
 var outOfJokesMessage = 'It&#39;s no joke, you&#39;ve seen them all!';
 
 /**
  * Joke routes tests
  */
 describe('Joke MongoDB CRUD tests (signed in)', function() {
-	beforeEach(function(done) {
 
-        this.timeout(INTERNAL_TIMEOUT_MS);
+    this.timeout(EXTERNAL_TIMEOUT_MS);
+    this.slow(EXTERNAL_TIMEOUT_MS);
+
+    beforeEach(function(done) {
 
         // Create user credentials
 		credentials = {
@@ -72,8 +75,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
     (function testBatchOne(){
         it('should be able to get single Joke instance if signed in (GET /jokes/:jokeId)', function(done) {
-            this.timeout(INTERNAL_TIMEOUT_MS);
-
             // save a joke
             agent.post('/jokes')
                 .send(joke1)
@@ -107,8 +108,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
         });
 
         it('should be able to get a list of Jokes if signed in (GET /jokes)', function(done) {
-            this.timeout(INTERNAL_TIMEOUT_MS);
-
             // get empty joke list (none saved yet)
             agent.get('/jokes')
                 .expect(200)
@@ -139,8 +138,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
         it('should get single Joke (with name swapped) if signed in (GET /jokes/:jokeId?firstName=Joe&lastName=Bloggs)',
             function(done) {
-                this.timeout(INTERNAL_TIMEOUT_MS);
-
                 joke1.name = 'Chuck Norris jokes are not very funny';
                 var expectedVersion = joke1.name.replace('Chuck Norris', 'Joe Bloggs');
 
@@ -179,8 +176,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
         it('should get default message for random Joke instance if signed in and database is empty (GET /jokes/random)',
             function(done) {
-                this.timeout(INTERNAL_TIMEOUT_MS);
-
                 // grab a random joke
                 agent.get('/jokes/random')
                     .expect(200)
@@ -200,7 +195,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
         it('should be able to mark Joke exluded when we get a random Joke instance if signed in (GET /jokes/random)',
             function(done) {
-                this.timeout(INTERNAL_TIMEOUT_MS);
 
                 // save a joke
                 agent.post('/jokes')
@@ -236,8 +230,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
             });
 
         it('should be able to get random Joke instance if signed in (GET /jokes/random)', function(done) {
-            this.timeout(INTERNAL_TIMEOUT_MS);
-
             // save a joke
             agent.post('/jokes')
                 .send(joke1)
@@ -288,8 +280,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
         it('should be able to get multiple random Joke instances if signed in (GET /jokes/random/:count)',
             function(done) {
-            this.timeout(INTERNAL_TIMEOUT_MS);
-
             // save a joke
             agent.post('/jokes')
                 .send(joke1)
@@ -331,8 +321,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
         it('should get default msg for multi rand Joke req if signed in & too few jokes available (GET /jokes/random)',
             function(done) {
-                this.timeout(INTERNAL_TIMEOUT_MS);
-
                 // save a joke
                 agent.post('/jokes')
                     .send(joke1)
@@ -365,8 +353,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
     (function testBatchTwo(){
         it('should be able to get a count of Joke instances if signed in (GET /jokes/count)', function(done) {
-            this.timeout(INTERNAL_TIMEOUT_MS);
-
             agent.get('/jokes/count')
                 .expect(200)
                 .end(function(err, res) {
@@ -398,8 +384,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
         });
 
         it('should be able to save Joke instance if signed in (POST /jokes)', function(done) {
-            this.timeout(INTERNAL_TIMEOUT_MS);
-
             agent.post('/jokes')
                 .send(joke1)
                 .expect(200)
@@ -421,8 +405,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
         });
 
         it('should be able to update Joke instance if signed in (PUT /jokes/:jokeId)', function(done) {
-            this.timeout(INTERNAL_TIMEOUT_MS);
-
             agent.post('/jokes')
                 .send(joke1)
                 .expect(200)
@@ -463,8 +445,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
         });
 
         it('should be able to delete Joke instance if signed in (DELETE /jokes/:jokeId)', function(done) {
-            this.timeout(INTERNAL_TIMEOUT_MS); // external method, long timeout
-
             // add a joke
             agent.post('/jokes')
                 .send(joke1)
@@ -512,8 +492,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
         it('should not be able to save Joke instance if no name is provided and signed in (POST /jokes)',
             function(done) {
-                this.timeout(INTERNAL_TIMEOUT_MS);
-
                 joke1.name = ''; // this is invalid
 
                 // save a joke
@@ -529,8 +507,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
 
         it('should be able to preload ICNDB Joke instances if signed on (GET /jokes/preload/:count)',
             function(done) {
-            this.timeout(INTERNAL_TIMEOUT_MS);
-
             agent.get('/jokes/preload/5')
                 .expect(200)
                 .end(function(err, res) {
@@ -543,8 +519,6 @@ describe('Joke MongoDB CRUD tests (signed in)', function() {
     })();
 
     afterEach(function(done) {
-        this.timeout(INTERNAL_TIMEOUT_MS);
-
         Joke.remove().exec(function() {
             User.remove().exec(function() {
                 //mongoose.connection.close(function() {
