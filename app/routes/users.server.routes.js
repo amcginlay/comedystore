@@ -12,14 +12,7 @@ module.exports = function(app) {
 	(function setupUserProfileApi(){
 		app.route('/users/me').get(users.me);
 		app.route('/users').put(users.update);
-		app.route('/users/accounts').delete(users.removeOAuthProvider);
-	})();
-
-	(function setupUserPasswordApi(){
-		app.route('/users/password').post(users.changePassword);
-		app.route('/auth/forgot').post(users.forgot);
-		app.route('/auth/reset/:token').get(users.validateResetToken);
-		app.route('/auth/reset/:token').post(users.reset);
+		//app.route('/users/accounts').delete(users.removeOAuthProvider);
 	})();
 
 	(function setupUserAuthenticationApi(){
