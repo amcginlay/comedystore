@@ -4,8 +4,26 @@
 angular.module('jokes').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Jokes', 'jokes', 'dropdown', '/jokes(/create)?');
-		Menus.addSubMenuItem('topbar', 'jokes', 'List Jokes', 'jokes');
-		Menus.addSubMenuItem('topbar', 'jokes', 'New Joke', 'jokes/create');
+		Menus.addMenuItem({
+			menuId: 'topbar',
+			menuItemTitle: 'Jokes',
+			menuItemURL: 'jokes',
+			menuItemType: 'dropdown',
+			menuItemUIRoute: '/jokes(/create)?'
+		});
+
+		Menus.addSubMenuItem({
+			menuId: 'topbar',
+			rootMenuItemURL: 'jokes',
+			menuItemTitle: 'List Jokes',
+			menuItemURL: 'jokes'
+		});
+
+		Menus.addSubMenuItem({
+			menuId: 'topbar',
+			rootMenuItemURL: 'jokes',
+			menuItemTitle: 'New Joke',
+			menuItemURL: 'jokes/create'
+		});
 	}
 ]);

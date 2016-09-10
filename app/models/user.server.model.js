@@ -11,7 +11,7 @@ var mongoose = require('mongoose'),
  * A Validation function for local strategy properties
  */
 var validateLocalStrategyProperty = function(property) {
-	return ((this.provider !== 'local' && !this.updated) || property.length);
+	return (this.provider !== 'local' && !this.updated) || property.length;
 };
 
 /**
@@ -44,9 +44,7 @@ var UserSchema = new Schema({
 	email: {
 		type: String,
 		trim: true,
-		default: '',
-		//validate: [validateLocalStrategyProperty, 'Please fill in your email'],
-		//match: [/.+\@.+\..+/, 'Please fill a valid email address']
+		default: ''
 	},
 	username: {
 		type: String,
@@ -125,28 +123,6 @@ UserSchema.methods.hashPassword = function(password) {
  */
 UserSchema.methods.authenticate = function(password) {
 	return this.password === this.hashPassword(password);
-};
-
-/**
- * Find possible not used username
- */
-UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
-	var _this = this;
-	var possibleUsername = username + (suffix || '');
-
-	_this.findOne({
-		username: possibleUsername
-	}, function(err, user) {
-		if (!err) {
-			if (!user) {
-				callback(possibleUsername);
-			} else {
-				return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
-			}
-		} else {
-			callback(null);
-		}
-	});
 };
 
 mongoose.model('User', UserSchema);

@@ -39,7 +39,7 @@ describe('Joke Model Unit Tests:', function() {
 
 	describe('Method Save', function() {
 		it('should be able to save without problems', function(done) {
-			return joke.save(function(err) {
+			joke.save(function(err) {
 				should.not.exist(err);
 				done();
 			});
@@ -47,8 +47,7 @@ describe('Joke Model Unit Tests:', function() {
 
 		it('should be able to show an error when try to save without name', function(done) { 
 			joke.name = '';
-
-			return joke.save(function(err) {
+			joke.save(function(err) {
 				should.exist(err);
 				done();
 			});

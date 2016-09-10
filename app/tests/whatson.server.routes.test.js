@@ -16,13 +16,14 @@ var EXTERNAL_TIMEOUT_MS = 20000; // for Comedy Store requests
  */
 describe('Whats On tests', function() {
 
+    this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
+    this.slow(EXTERNAL_TIMEOUT_MS);
+
     beforeEach(function(done) {
         done();
     });
 
     it('should be able to get an HTML snippet of whats on soon at the Comedy Store', function(done) {
-        this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
-
         agent.get('/whatson')
             .expect(200)
             .end(function(req, res) {

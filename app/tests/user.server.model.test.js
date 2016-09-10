@@ -10,19 +10,22 @@ var should = require('should'),
     User = mongoose.model('User'),
     Joke = mongoose.model('Joke'),
     agent = request.agent(app);
-    //passport = require('passport');
 
 /**
  * Globals
  */
 var credentials, user, user2;
+var EXTERNAL_TIMEOUT_MS = 20000; // for MongoDB requests
 
 /**
  * Unit tests
  */
 describe('User Model Unit Tests:', function() {
-	beforeEach(function(done) {
 
+    this.timeout(EXTERNAL_TIMEOUT_MS); // external method, long timeout
+    this.slow(EXTERNAL_TIMEOUT_MS);
+
+	beforeEach(function(done) {
         // Create user credentials
         credentials = {
             username: 'username',
@@ -59,20 +62,33 @@ describe('User Model Unit Tests:', function() {
 			});
 		});
 
-		it('should be able to save without problems', function(done) {
-			user.save(done);
+        function signupTest(done) {
+            agent.post('/auth/signup')
+                .send(user)
+                .expect(200)
+                .end(function(err) {
+                    done(err);
+            });
+        }
+
+		it('should be able to sign up without problems', function(done) {
+			signupTest(function(err){
+                should(err).be.null();
+                done(err);
+            });
 		});
 
-		it('should fail to save an existing user again', function(done) {
-			user.save();
-			return user2.save(function(err) {
-				should.exist(err);
-				done();
-			});
-		});
+        it('should fail to sign up twice with the same user details', function(done) {
+            signupTest(function() {
+                signupTest(function(err) {
+                    should(err).be.not.null();
+                    done();
+                });
+            });
+        });
 
         it('should signin and signout without problems', function(done) {
-            user.save(function(saveErr) {
+            signupTest(function(saveErr) {
                 if (saveErr) return done(saveErr);
 
                 // firstly sign-out so there can be no doubt of the current state
@@ -86,8 +102,7 @@ describe('User Model Unit Tests:', function() {
                             .end(function(meErr, meRes) {
                                 if (meErr) return done(meErr);
 
-                                meRes.body.should.be.instanceOf(Object);
-                                Object.keys(meRes.body).should.have.lengthOf(0);
+                                should(meRes.body).be.null();
 
                                 // sign in
                                 agent.post('/auth/signin')
@@ -95,8 +110,6 @@ describe('User Model Unit Tests:', function() {
                                     .expect(200)
                                     .end(function(signinErr2, signinRes2) {
                                         if (signinErr2) return done(signinErr2);
-
-                                        //var cookie = signinRes.headers['set-cookie'][0];
 
                                         // check that there IS someone signed in
                                         agent.get('/users/me')
@@ -118,8 +131,7 @@ describe('User Model Unit Tests:', function() {
                                                             .end(function(me3Err, me3Res) {
                                                                 if (me3Err) return done(me3Err);
 
-                                                                me3Res.body.should.be.instanceOf(Object);
-                                                                Object.keys(me3Res.body).should.have.lengthOf(0);
+                                                                should(meRes.body).be.null();
 
                                                                 // if we got here we're all good
                                                                 done();

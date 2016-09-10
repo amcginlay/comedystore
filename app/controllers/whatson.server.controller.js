@@ -16,7 +16,7 @@ exports.list = function(req, res) {
             var $ = cheerio.load(results);
 
             var comedyNights = [];
-            $('.side-block').each(function(i, elem) {
+            $('.side-block').each(function() {
 
                 var eventDateDom = $(this).find('.caldate');
                 var eventMetaDom = $(this).find('.show-meta');
@@ -26,24 +26,26 @@ exports.list = function(req, res) {
                 var eventMonth = $(eventDateDom).children('span').eq(1).text();
 
                 var eventMetaH4Dom = $(eventMetaDom).children('h4');
-                var h4First = eventMetaH4Dom.first().clone().children().remove().end().text(); // eliminate the stray child <span>
+                var h4First = eventMetaH4Dom.first().clone().children().remove().end().text(); // zap stray child <span>
                 var weekDayTimeArray = h4First.split(' - ');
                 var price = eventMetaH4Dom.children('span').first().text().trim();
 
-                var commedians = [];
-                $(eventInfoDom).find('.comedians .commodal .comedian-text').each(function(i, elem) {
-                    var comedian = $(this).clone().children().remove().end().text();
-                    commedians.push(comedian);
-                });
+                (function publishComedyNight(){
+                    var commedians = [];
+                    $(eventInfoDom).find('.comedians .commodal .comedian-text').each(function() {
+                        var comedian = $(this).clone().children().remove().end().text();
+                        commedians.push(comedian);
+                    });
 
-                var comedyNight = {
-                    eventDate: weekDayTimeArray[0] + ' ' + eventDay + ' ' + eventMonth,
-                    eventTime: weekDayTimeArray[1],
-                    eventPrice: price,
-                    eventTitle: $(eventMetaDom).children('.meta-title').first().text(),
-                    comedians: commedians
-                };
-                comedyNights.push(comedyNight);
+                    var comedyNight = {
+                        eventDate: weekDayTimeArray[0] + ' ' + eventDay + ' ' + eventMonth,
+                        eventTime: weekDayTimeArray[1],
+                        eventPrice: price,
+                        eventTitle: $(eventMetaDom).children('.meta-title').first().text(),
+                        comedians: commedians
+                    };
+                    comedyNights.push(comedyNight);
+                })();
             });
 
             res.json({ value: comedyNights});

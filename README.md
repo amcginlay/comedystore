@@ -1,8 +1,9 @@
 # The Comedy Store's Unfunny Brother by Alan McGinlay
 
 [![Build Status](https://travis-ci.org/amcginlay/comedystore.svg?branch=master)](https://travis-ci.org/amcginlay/comedystore)
+[![Coverage Status](https://coveralls.io/repos/github/amcginlay/comedystore/badge.svg)](https://coveralls.io/github/amcginlay/comedystore)
 
-![Comedy Store Logo](http://thecomedystore.co.uk/london/wp-content/themes/the-comedy-store/images/logo.png)
+![Comedy Store Logo](https://raw.githubusercontent.com/amcginlay/comedystore/master/public/modules/core/img/brand/logo.png)
 
 As per the [instructions](https://github.com/makersacademy/comedy_api_tech_test), this is my attempt at the challenge.
 

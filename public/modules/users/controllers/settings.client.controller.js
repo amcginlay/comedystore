@@ -8,17 +8,14 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		if (!$scope.user) $location.path('/');
 
 		// Check if there are additional accounts 
-		$scope.hasConnectedAdditionalSocialAccounts = function(provider) {
-			for (var i in $scope.user.additionalProvidersData) {
-				return true;
-			}
-
-			return false;
+		$scope.hasConnectedAdditionalSocialAccounts = function() {
+			return ($scope.user.additionalProvidersData.length() > 0);
 		};
 
 		// Check if provider is already in use with current user
 		$scope.isConnectedSocialAccount = function(provider) {
-			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
+			return $scope.user.provider === provider ||
+				($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
 		};
 
 		// Remove a user social account
@@ -59,7 +56,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.changeUserPassword = function() {
 			$scope.success = $scope.error = null;
 
-			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
+			$http.post('/users/password', $scope.passwordDetails).success(function() {
 				// If successful show success message and clear form
 				$scope.success = true;
 				$scope.passwordDetails = null;
