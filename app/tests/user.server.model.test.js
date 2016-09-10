@@ -62,12 +62,22 @@ describe('User Model Unit Tests:', function() {
 			});
 		});
 
-		it('should be able to save without problems', function(done) {
-			user.save(done);
+        function signupTest(done) {
+            agent.post('/auth/signup')
+                .send(user)
+                .expect(200)
+                .end(function(signinErr) {
+                    should(signinErr).be.null();
+                    done();
+            });
+        }
+
+		it('should be able to sign up without problems', function(done) {
+			signupTest(done);
 		});
 
 		it('should fail to save an existing user again', function(done) {
-			user.save(function(){
+            signupTest(function(){
                 user2.save(function(err) {
                     should.exist(err);
                     done();
@@ -76,7 +86,7 @@ describe('User Model Unit Tests:', function() {
 		});
 
         it('should signin and signout without problems', function(done) {
-            user.save(function(saveErr) {
+            signupTest(function(saveErr) {
                 if (saveErr) return done(saveErr);
 
                 // firstly sign-out so there can be no doubt of the current state
