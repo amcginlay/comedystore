@@ -24,7 +24,8 @@ module.exports = {
 				'public/lib/jquery/dist/jquery.min.js',
 				'public/lib/jquery.scrollTo/jquery.scrollTo.min.js',
 				'public/lib/jquery.localScroll/jquery.localScroll.min.js',
-				'public/lib/classie/classie.js'
+				'public/lib/classie/classie.js',
+				'public/libalt/gnmenu.js'
 			]
 		},
 		css: 'public/dist/application.min.css',
