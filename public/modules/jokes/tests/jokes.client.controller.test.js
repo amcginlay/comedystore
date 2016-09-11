@@ -50,6 +50,10 @@
 			});
 		}));
 
+		it('should expose the authentication service', function() {
+			expect(scope.authentication).toBeTruthy();
+		});
+
 		it('$scope.find() should create an array with at least one Joke object fetched from XHR',
 			inject(function(Jokes) {
 			// Create sample Joke using the Jokes service
