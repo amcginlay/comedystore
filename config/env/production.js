@@ -22,6 +22,7 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				//'public/lib/jquery/dist/jquery.min.js',
+				'public/lib/jquery.localScroll/jquery.localScroll.min.js',
 				'public/lib/classie/classie.js'
 			]
 		},
