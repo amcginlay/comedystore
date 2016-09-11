@@ -17,7 +17,13 @@ module.exports = function(config) {
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
 		//reporters: ['progress'],
-		reporters: ['progress'],
+		reporters: ['progress', 'coverage'],
+
+		preprocessors: {
+			// NOTE this configuration option is VERY specific for the current project configuration
+			// it excludes node_modules, */lib and */*/*/tests directories
+			'!(node_modules)/!(lib)/*/!(tests)/*.js': ['coverage']
+		},
 
 		// Web server port
 		port: 9876,
