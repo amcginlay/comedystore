@@ -46,3 +46,7 @@ My solution is a single page [MEAN Stack](http://mean.io) app, using front-to-ba
 * Given that we're web-scraping their site, if The Comedy Store make changes tomorrow ... BANG! (maybe)
 * The website is only fully tested in Google Chrome browser.
 * Some Mocha tests may periodically time out.  It's not clear why but I suspect the MongoDB server could be getting starved of connections.
+
+## v1.0.1 Release Notes (Sept 2016)
+* Changes predominantly based around coding standards, test coverage and removal of superfluous scaffolding code.
+* Integrated Travis, Coveralls and Hound.
