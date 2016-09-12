@@ -17,7 +17,12 @@ module.exports = function(config) {
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
 		//reporters: ['progress'],
-		reporters: ['progress', 'coverage'],
+		reporters: ['progress', 'coverage', 'coveralls'],
+
+		coverageReporter: {
+			type: 'lcov',
+			dir: 'coverage'
+		},
 
 		preprocessors: {
 			// NOTE this configuration option is VERY specific for the current project configuration

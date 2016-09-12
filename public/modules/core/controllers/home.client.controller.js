@@ -8,7 +8,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.joke = 'Wait for it ...';
         $scope.whatson = '<p>Fetching data ...</p>';
 
-        var getRandomJoke = function() {
+        $scope.getRandomJoke = function() {
 
             var user = $scope.authentication.user;
 
@@ -26,7 +26,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             });
         };
 
-        var getWhatsOn = function() {
+        $scope.getWhatsOn = function() {
 
             WhatsOn.get(function(res) {
                 res.value.forEach(function(entry) {
@@ -38,8 +38,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         };
 
         $scope.init = function() {
-            getRandomJoke();
-            getWhatsOn();
+            $scope.getRandomJoke();
+            $scope.getWhatsOn();
         };
 	}
 ]);

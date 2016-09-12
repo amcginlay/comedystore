@@ -41,6 +41,7 @@
   "devDependencies": {
     "coveralls": "^2.11.12",
     "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
     "grunt-concurrent": "~2.3.1",
     "grunt-contrib-csslint": "^1.0.0",
     "grunt-contrib-cssmin": "~1.0.2",
@@ -58,6 +59,7 @@
     "karma": "~1.2.0",
     "karma-chrome-launcher": "~2.0.0",
     "karma-coverage": "~1.1.1",
+    "karma-coveralls": "^1.1.2",
     "karma-firefox-launcher": "~1.0.0",
     "karma-jasmine": "~1.0.2",
     "karma-phantomjs-launcher": "~1.0.2",

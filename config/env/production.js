@@ -21,7 +21,11 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.min.js',
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
-                'public/lib/jquery/dist/jquery.min.js'
+				'public/lib/jquery/dist/jquery.min.js',
+				'public/lib/jquery.scrollTo/jquery.scrollTo.min.js',
+				'public/lib/jquery.localScroll/jquery.localScroll.min.js',
+				'public/lib/classie/classie.js',
+				'public/libalt/gnmenu.js'
 			]
 		},
 		css: 'public/dist/application.min.css',
