@@ -29,10 +29,10 @@
 			});
 			scope.authentication = {
 				user: { firstName: 'x', lastName: 'y' }
-			}
+			};
 			scope.getRandomJoke();
 			httpBackend.flush();
-			expect(scope.joke).toBe(testJoke)
+			expect(scope.joke).toBe(testJoke);
 		});
 
 		it('$scope.getRandomJoke() should return default joke when nothing available', function() {
@@ -41,7 +41,7 @@
 			});
 			scope.authentication = {
 				user: { firstName: 'x', lastName: 'y' }
-			}
+			};
 			scope.getRandomJoke();
 			httpBackend.flush();
 			expect(scope.joke).toBe('Hmmmm, something went wrong.  That&#39;s not at all funny! :-(');
@@ -68,9 +68,9 @@
 		it('$scope.init() should not fail', function() {
 			scope.authentication = {
 				user: { firstName: 'x', lastName: 'y' }
-			}
+			};
 			scope.init();
 			expect(true).toBe(true);
-		})
+		});
 	});
 })();
